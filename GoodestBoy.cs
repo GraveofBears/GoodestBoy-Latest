@@ -15,10 +15,10 @@ namespace GoodestBoy
     [BepInPlugin(ModGUID, ModName, ModVersion)]
 
 
-    public class OdinsKingdom : BaseUnityPlugin
+    public class GoodestBoy : BaseUnityPlugin
     {
         private const string ModName = "GoodestBoy";
-        private const string ModVersion = "0.1.6";
+        private const string ModVersion = "0.1.7";
         private const string ModGUID = "odinplus.plugins.goodestboy";
 
 
@@ -52,7 +52,7 @@ namespace GoodestBoy
 
             Item BestestStick = new("gsd", "BestestStick");
             BestestStick.Name.English("Bestest Stick");
-            BestestStick.Description.English("A stick for your bestest friend");
+            BestestStick.Description.English("The only stick worthy of your pupper, doesn't it look delicious.");
             BestestStick.Crafting.Add(CraftingTable.Workbench, 1);
             BestestStick.RequiredItems.Add("Wood", 2);
             BestestStick.CraftAmount = 1;
@@ -60,7 +60,7 @@ namespace GoodestBoy
 
             Item YummyBone = new("gsd", "YummyBone");
             YummyBone.Name.English("YummyBone");
-            YummyBone.Description.English("A bone for your bestest friend");
+            YummyBone.Description.English("A treat used to tame your BestestDog. Yummy!");
             YummyBone.Crafting.Add(CraftingTable.Workbench, 1);
             YummyBone.RequiredItems.Add("BoneFragments", 4);
             YummyBone.CraftAmount = 1;
@@ -71,9 +71,9 @@ namespace GoodestBoy
                 CanBeTamed = true,
                 FoodItems = "BestestStick, YummyBone, RawMeat, CookedMeat, BoarJerky, NeckTail, DeerStew, NeckTailGrilled, DeerMeat, CookedDeerMeat, MinceMeatSauce, Sausages, Entrails, SerpentMeatCooked, SerpentStew, SerpentMeat, CookedWolfMeat, WolfMeat, Wolfjerky, LoxMeat, CookedLoxMeat, LoxPie",
                 SpawnChance = 10,
+                RequiredWeather = Weather.None,
                 GroupSize = new Range(1, 2),
                 CheckSpawnInterval = 300,
-                RequiredWeather = Weather.None,
                 SpecificSpawnTime = SpawnTime.Night,
                 Maximum = 1
             };
@@ -82,7 +82,7 @@ namespace GoodestBoy
             BestestDog.Drops["WolfMeat"].Amount = new Range(1, 2);
             BestestDog.Drops["WolfMeat"].DropChance = 50f;
 
-            Creature Bestest_Pup = new("gsd", "Bestest_Pup")            //add creature
+            Creature BestestPup = new("gsd", "BestestPup")            //add creature
             {
                 Biome = Heightmap.Biome.None,
                 CanSpawn = true,
@@ -91,9 +91,15 @@ namespace GoodestBoy
                 Maximum = 1
 
             };
-            Bestest_Pup.Drops["BoneFragments"].Amount = new Range(1, 2);
-            Bestest_Pup.Drops["BoneFragments"].DropChance = 50f;
+            BestestPup.Drops["BoneFragments"].Amount = new Range(1, 2);
+            BestestPup.Drops["BoneFragments"].DropChance = 50f;
 
+            GameObject sfx_dog_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_bark"); //register projectile
+            GameObject sfx_dog_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_panting"); //register projectile
+
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Harmony harmony = new(ModGUID);
+            harmony.PatchAll(assembly);
 
         }
     }
