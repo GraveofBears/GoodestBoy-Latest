@@ -58,6 +58,14 @@ namespace GoodestBoy
             BestestStick.CraftAmount = 1;
             GameObject BestestStick_Projectile = ItemManager.PrefabManager.RegisterPrefab("gsd", "BestestStick_Projectile"); //register projectile
 
+            Item BestestBall = new("gsd", "BestestBall");
+            BestestBall.Name.English("Bestest Ball");
+            BestestBall.Description.English("The only ball worthy of your bestest friend.");
+            BestestBall.Crafting.Add(CraftingTable.Workbench, 1);
+            BestestBall.RequiredItems.Add("LeatherScraps", 2);
+            BestestBall.CraftAmount = 1;
+            GameObject BestestBall_Projectile = ItemManager.PrefabManager.RegisterPrefab("gsd", "BestestBall_Projectile"); //register projectile
+
             Item YummyBone = new("gsd", "YummyBone");
             YummyBone.Name.English("YummyBone");
             YummyBone.Description.English("A treat used to tame your BestestDog. Yummy!");
