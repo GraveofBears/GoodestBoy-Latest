@@ -77,13 +77,13 @@ namespace GoodestBoy
             BestestBall.CraftAmount = 1;
             GameObject BestestBall_Projectile = ItemManager.PrefabManager.RegisterPrefab("gsd", "BestestBall_Projectile"); //register projectile
 
-            Item YummyBone = new("gsd", "YummyBone");
-            YummyBone.Name.English("YummyBone");
-            YummyBone.Description.English("A treat used to tame your BestestDog. Yummy!");
-            YummyBone.Crafting.Add(CraftingTable.Workbench, 1);
-            YummyBone.RequiredItems.Add("BoneFragments", 4);
-            YummyBone.CraftAmount = 1;
-            var shared = YummyBone.Prefab.GetComponent<ItemDrop>().m_itemData.m_shared;
+            Item GoodestWhistle = new("gsd", "GoodestWhistle");
+            GoodestWhistle.Name.English("GoodestWhistle");
+            GoodestWhistle.Description.English("A whistle to call your best friend.");
+            GoodestWhistle.Crafting.Add(CraftingTable.Workbench, 1);
+            GoodestWhistle.RequiredItems.Add("FineWood", 4);
+            GoodestWhistle.CraftAmount = 1;
+            var shared = GoodestWhistle.Prefab.GetComponent<ItemDrop>().m_itemData.m_shared;
             var statusEffect = ScriptableObject.CreateInstance<Recall>(); //sets the status effect script into this variable. 
             statusEffect.m_ttl = 0.25f; // duration of the status effect.
             shared.m_consumeStatusEffect = statusEffect; // the item = the status effect.
@@ -92,7 +92,7 @@ namespace GoodestBoy
             {
                 Biome = Heightmap.Biome.BlackForest,
                 CanBeTamed = true,
-                FoodItems = "BestestStick, YummyBone, RawMeat, CookedMeat, BoarJerky, NeckTail, DeerStew, NeckTailGrilled, DeerMeat, CookedDeerMeat, MinceMeatSauce, Sausages, Entrails, SerpentMeatCooked, SerpentStew, SerpentMeat, CookedWolfMeat, WolfMeat, Wolfjerky, LoxMeat, CookedLoxMeat, LoxPie",
+                FoodItems = "RawMeat, CookedMeat, BoarJerky, NeckTail, DeerStew, NeckTailGrilled, DeerMeat, CookedDeerMeat, MinceMeatSauce, Sausages, Entrails, SerpentMeatCooked, SerpentStew, SerpentMeat, CookedWolfMeat, WolfMeat, Wolfjerky, LoxMeat, CookedLoxMeat, LoxPie, BestestStick",
                 SpawnChance = 10,
                 RequiredWeather = Weather.None,
                 GroupSize = new Range(1, 2),
