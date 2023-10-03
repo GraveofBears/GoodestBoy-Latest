@@ -53,10 +53,10 @@ namespace GoodestBoy
             Off = 0
         }
 
-        public static List<string> _creatureList = new()
-    {
-        "BestestDog",
-    };
+        //public static List<string> _creatureList = new()
+        //{
+        //    "BestestDog",
+        //};
 
         public void Awake()
         {
