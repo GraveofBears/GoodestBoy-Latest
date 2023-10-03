@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-namespace GoodestBoy;
+namespace GoodestBoy.Patches;
 
 public class FetchAI : MonoBehaviour
 {

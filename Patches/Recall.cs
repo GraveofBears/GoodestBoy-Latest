@@ -3,7 +3,7 @@ using System.Linq;
 using GoodestBoy;
 using UnityEngine;
 
-namespace GoodestBoy;
+namespace GoodestBoy.Patches;
 
 public class Recall : StatusEffect
 {

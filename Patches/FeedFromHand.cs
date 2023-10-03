@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace GoodestBoy;
+namespace GoodestBoy.Patches;
 
 [HarmonyPatch(typeof(Humanoid), nameof(Humanoid.UseItem))]
 public class HumanoidPatch

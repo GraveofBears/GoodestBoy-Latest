@@ -141,12 +141,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FeedFromHand.cs" />
-    <Compile Include="FetchAI.cs" />
-    <Compile Include="FetchSystem.cs" />
+    <Compile Include="Patches\FeedFromHand.cs" />
+    <Compile Include="Patches\FetchAI.cs" />
+    <Compile Include="Patches\FetchSystem.cs" />
     <Compile Include="GoodestBoy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Recall.cs" />
+    <Compile Include="Patches\Recall.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="CreatureManager.dll" />

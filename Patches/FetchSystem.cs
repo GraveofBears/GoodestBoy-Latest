@@ -3,7 +3,7 @@ using HarmonyLib;
 using GoodestBoy;
 using UnityEngine;
 
-namespace GoodestBoy;
+namespace GoodestBoy.Patches;
 
 [HarmonyPatch]
 public class FetchSystem
