@@ -38,6 +38,7 @@ public class Recall : StatusEffect
         }
     }
 
+
     public override void UpdateStatusEffect(float dt)
     {
         base.UpdateStatusEffect(dt);

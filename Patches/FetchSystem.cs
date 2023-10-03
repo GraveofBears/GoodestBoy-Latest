@@ -27,7 +27,7 @@ public class FetchSystem
         //item.m_shared.m_name != "$fr_bone" - means if not your item then ignores the patch.
         //change the "$fr_bone" with your items m_name
         //you can add more items by adding this line: || item.m_shared.m_name != "$youritemname"
-        if (!__result || !__instance.IsPlayer() || !_lastDroppedItem || item.m_shared.m_name != "BestestBall") return;
+        if (!__result || !__instance.IsPlayer() || !_lastDroppedItem || item.m_shared.m_name != "$bestestball") return;
         foreach (var pet in from pet in FetchAI._fetchAiList where !((pet.gameObject.transform.position - Player.m_localPlayer.transform.position).sqrMagnitude > 80f) let component = pet.GetComponent<Character>() where (bool)component && component.IsTamed() && !pet.GetComponent<Growup>() && !pet.m_monsterAI.IsAlerted() && pet.m_AiState == FetchAI.AIStates.BaseAI select pet)
         {
             pet.GetBall(_lastDroppedItem);
@@ -94,7 +94,7 @@ public class FetchSystem
             var component = collider.attachedRigidbody.GetComponent<ItemDrop>();
             //component.m_itemData.m_shared.m_name != "$fr_bone" -change "$fr_bone" into your fetch item m_name
             //you can add more by adding this: || component.m_itemData.m_shared.m_name != "$yourfetchitem"
-            if (component == null || !component.GetComponent<ZNetView>().IsValid() || component.m_itemData.m_shared.m_name != "BestestBall") continue;
+            if (component == null || !component.GetComponent<ZNetView>().IsValid() || component.m_itemData.m_shared.m_name != "$bestestball") continue;
             var component2 = component.GetComponent<Rigidbody>();
             if (!(bool)component2 || !component2.useGravity) continue;
             var sqrMagnitude = (component.transform.position - pos).sqrMagnitude;
@@ -126,7 +126,7 @@ public class FetchSystem
     [HarmonyPatch(typeof(Projectile), nameof(Projectile.SpawnOnHit))]
     public static void SpawnOnHit_Postfix(Projectile __instance, ref ItemDrop.ItemData ___m_spawnItem)
     {
-        if (__instance.m_spawnItem == null || !__instance.m_respawnItemOnHit || !_lastDroppedItem || ___m_spawnItem.m_shared.m_name != "BestestBall") return;
+        if (__instance.m_spawnItem == null || !__instance.m_respawnItemOnHit || !_lastDroppedItem || ___m_spawnItem.m_shared.m_name != "$bestestball") return;
         foreach (var pet in from pet in FetchAI._fetchAiList where !((pet.gameObject.transform.position - Player.m_localPlayer.transform.position).sqrMagnitude > 80f) let component = pet.GetComponent<Character>() where (bool)component && component.IsTamed() && !pet.GetComponent<Growup>() && !pet.m_monsterAI.IsAlerted() && pet.m_AiState == FetchAI.AIStates.BaseAI select pet)
         {
             pet.GetBall(_lastDroppedItem);

@@ -60,6 +60,9 @@ namespace GoodestBoy
 
         public void Awake()
         {
+            GameObject sfx_dog_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_bark"); //register projectile
+            GameObject sfx_dog_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_panting"); //register projectile
+            GameObject sfx_gb_whistle = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_gb_whistle");
 
             Item BestestStick = new("gsd", "BestestStick");
             BestestStick.Name.English("Bestest Stick");
@@ -81,12 +84,15 @@ namespace GoodestBoy
             GoodestWhistle.Name.English("GoodestWhistle");
             GoodestWhistle.Description.English("A whistle to call your best friend.");
             GoodestWhistle.Crafting.Add(CraftingTable.Workbench, 1);
-            GoodestWhistle.RequiredItems.Add("FineWood", 4);
+            GoodestWhistle.RequiredItems.Add("FineWood", 1);
             GoodestWhistle.CraftAmount = 1;
             var shared = GoodestWhistle.Prefab.GetComponent<ItemDrop>().m_itemData.m_shared;
             var statusEffect = ScriptableObject.CreateInstance<Recall>(); //sets the status effect script into this variable. 
             statusEffect.m_ttl = 0.25f; // duration of the status effect.
             shared.m_consumeStatusEffect = statusEffect; // the item = the status effect.
+
+
+
 
             Creature BestestDog = new("gsd", "BestestDog")            //add creature
             {
@@ -116,9 +122,6 @@ namespace GoodestBoy
             };
             BestestPup.Drops["BoneFragments"].Amount = new Range(1, 2);
             BestestPup.Drops["BoneFragments"].DropChance = 50f;
-
-            GameObject sfx_dog_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_bark"); //register projectile
-            GameObject sfx_dog_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_panting"); //register projectile
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             Harmony harmony = new(ModGUID);
