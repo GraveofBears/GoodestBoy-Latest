@@ -1,13 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using BepInEx;
 using BepInEx.Configuration;
-using UnityEngine;
-using ServerSync;
+using BepInEx.Logging;
+using CreatureManager;
 using HarmonyLib;
 using ItemManager;
-using CreatureManager;
+using ServerSync;
+using UnityEngine;
+
 
 
 namespace GoodestBoy
@@ -47,6 +51,11 @@ namespace GoodestBoy
             Off = 0
         }
 
+        public static List<string> _creatureList = new()
+    {
+        "BestestDog",
+    };
+
         public void Awake()
         {
 
@@ -72,6 +81,10 @@ namespace GoodestBoy
             YummyBone.Crafting.Add(CraftingTable.Workbench, 1);
             YummyBone.RequiredItems.Add("BoneFragments", 4);
             YummyBone.CraftAmount = 1;
+            var shared = YummyBone.Prefab.GetComponent<ItemDrop>().m_itemData.m_shared;
+            var statusEffect = ScriptableObject.CreateInstance<Recall>(); //sets the status effect script into this variable. 
+            statusEffect.m_ttl = 0.25f; // duration of the status effect.
+            shared.m_consumeStatusEffect = statusEffect; // the item = the status effect.
 
             Creature BestestDog = new("gsd", "BestestDog")            //add creature
             {
