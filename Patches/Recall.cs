@@ -21,7 +21,7 @@ public class Recall : StatusEffect
         //this is where you add your creatures to be selected in summoning process.
         //pet.name.Replace("(Clone)", "") == "Wolf" -change "Wolf" into your creatures prefab name.
         //you can add more by adding this: || pet.name.Replace("(Clone)", "") == "yourpetprefabname"
-        foreach (var pet in charactersInRange.Where(pet => pet.IsTamed() && pet.name.Replace("(Clone)", "") == "BestestDog")
+        foreach (var pet in charactersInRange.Where(pet => pet.IsTamed() && pet.name.Replace("(Clone)", "") == "BestestDog"))
         {
             num++;
             var component = pet.GetComponent<MonsterAI>();
