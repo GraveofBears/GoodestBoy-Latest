@@ -15,7 +15,7 @@ public class HumanoidPatch
         if (hoverable != null && !fromInventoryGui)
         {
             var monsterAI = hoverObject.GetComponent<MonsterAI>();
-            if (monsterAI != null && GoodestBoy._creatureList.Contains(monsterAI.gameObject.name.Replace("(Clone)", "")) &&
+            if (monsterAI != null && monsterAI.gameObject.name.Replace("(Clone)", "") == "BestestDog" &&
                 monsterAI.CanConsume(item))
             {
                 var tameable = hoverObject.GetComponent<Tameable>();
