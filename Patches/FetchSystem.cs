@@ -43,7 +43,7 @@ public class FetchSystem
         //change the "Wolf" with the name of your creature.
         //you can also this change that into this: or like this: !__instance.gameObject.name.ToLower().Contains("yourcreature")
         //you can add more creature by adding this: || __instance.gameObject.name.Replace("(Clone)", "") != "yourcreature" 
-        if (!GoodestBoy._creatureList.Contains(__instance.gameObject.name.Replace("(Clone)", ""))) return;
+        if (__instance.gameObject.name.Replace("(Clone)", "") != "BestestDog") return;
         var component = __instance.GetComponent<Character>();
         if ((object)component != null && component.IsTamed())
         {
@@ -60,7 +60,7 @@ public class FetchSystem
         //change the "Wolf" with the name of your creature.
         //you can also this change that into this: or like this: !__instance.gameObject.name.ToLower().Contains("yourcreature")
         //you can add more creature by adding this: || __instance.gameObject.name.Replace("(Clone)", "") != "yourcreature" 
-        if (!GoodestBoy._creatureList.Contains(__instance.gameObject.name.Replace("(Clone)", ""))) return;
+        if (__instance.gameObject.name.Replace("(Clone)", "") != "BestestDog") return;
         var component = __instance.GetComponent<Character>();
         if ((object)component != null && component.IsTamed())
         {
@@ -77,7 +77,7 @@ public class FetchSystem
         //change the "Wolf" with the name of your creature.
         //you can also this change that into this: or like this: !__instance.name.ToLower().Contains("yourcreature")
         //you can add more creature by adding this: || __instance.name.Replace("(Clone)", "") != "yourcreature" 
-        if (__instance == null || __instance.IsPlayer() || __instance.IsBoss() || !__instance.m_nview.IsValid() || !__instance.IsTamed() || (bool)__instance.GetComponent<Growup>() || !GoodestBoy._creatureList.Contains(__instance.name.Replace("(Clone)", ""))) return;
+        if (__instance == null || __instance.IsPlayer() || __instance.IsBoss() || !__instance.m_nview.IsValid() || !__instance.IsTamed() || (bool)__instance.GetComponent<Growup>() || __instance.name.Replace("(Clone)", "") != "BestestDog") return;
         NewTame(__instance.gameObject);
     }
 
