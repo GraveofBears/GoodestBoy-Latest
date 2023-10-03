@@ -215,17 +215,17 @@ public class FetchAI : MonoBehaviour
         m_targetItem.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         m_targetItem.isKinematic = true;
         m_targetItem.GetComponent<ItemDrop>().m_autoPickup = false;
-        Transform petTransform = null;
-        if (transform.gameObject.name.ToLower().Contains("goodestboy"))
-        {
-            petTransform = global::Utils.FindChild(transform, "Head");
-        }
+        //Transform petTransform = null;
+        //if (transform.gameObject.name.ToLower().Contains("goodestboy"))
+        //{
+        //    petTransform = global::Utils.FindChild(transform, "Head");
+        //}
 
-        else
-        {
-            petTransform = global::Utils.FindChild(transform, "Head");
-        }
-        //ar tamedTransform = Utils.FindChild(transform, "Head");
+        //else
+        //{
+        //    petTransform = global::Utils.FindChild(transform, "Head");
+        //}
+        var petTransform = Utils.FindChild(transform, "Head");
         var vector = m_targetItem.transform.rotation * m_boneOffset;
         m_targetItem.transform.SetParent(petTransform, worldPositionStays: true);
         m_targetItem.transform.position = petTransform.position + vector + petTransform.rotation * m_mouthOffset;
