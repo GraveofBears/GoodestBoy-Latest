@@ -15,7 +15,6 @@ using GoodestBoy.Patches;
 
 
 
-
 namespace GoodestBoy
 {
     [BepInPlugin(ModGUID, ModName, ModVersion)]
@@ -53,24 +52,21 @@ namespace GoodestBoy
             Off = 0
         }
 
-        //public static List<string> _creatureList = new()
-        //{
-        //    "BestestDog",
-        //};
 
         public void Awake()
         {
+
             GameObject sfx_dog_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_bark"); //register projectile
             GameObject sfx_dog_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_panting"); //register projectile
             GameObject sfx_gb_whistle = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_gb_whistle");
 
-            Item BestestStick = new("gsd", "BestestStick");
-            BestestStick.Name.English("Bestest Stick");
-            BestestStick.Description.English("The only stick worthy of your pupper, doesn't it look delicious.");
-            BestestStick.Crafting.Add(CraftingTable.Workbench, 1);
-            BestestStick.RequiredItems.Add("Wood", 2);
-            BestestStick.CraftAmount = 1;
-            GameObject BestestStick_Projectile = ItemManager.PrefabManager.RegisterPrefab("gsd", "BestestStick_Projectile"); //register projectile
+            Item BestestTreat = new("gsd", "BestestTreat");
+            BestestTreat.Name.English("Bestest Treat");
+            BestestTreat.Description.English("A treat for your best friend, doesn't it look delicious.");
+            BestestTreat.Crafting.Add(CraftingTable.Workbench, 1);
+            BestestTreat.RequiredItems.Add("CookedMeat", 2);
+            BestestTreat.CraftAmount = 5;
+            GameObject BestestTreat_Projectile = ItemManager.PrefabManager.RegisterPrefab("gsd", "BestestTreat_Projectile"); //register projectile
 
             Item BestestBall = new("gsd", "BestestBall");
             BestestBall.Name.English("Bestest Ball");
@@ -88,17 +84,15 @@ namespace GoodestBoy
             GoodestWhistle.CraftAmount = 1;
             var shared = GoodestWhistle.Prefab.GetComponent<ItemDrop>().m_itemData.m_shared;
             var statusEffect = ScriptableObject.CreateInstance<Recall>(); //sets the status effect script into this variable. 
-            statusEffect.m_ttl = 0.25f; // duration of the status effect.
+            statusEffect.m_ttl = 1f; // duration of the status effect.
             shared.m_consumeStatusEffect = statusEffect; // the item = the status effect.
-
-
 
 
             Creature BestestDog = new("gsd", "BestestDog")            //add creature
             {
                 Biome = Heightmap.Biome.BlackForest,
                 CanBeTamed = true,
-                FoodItems = "RawMeat, CookedMeat, BoarJerky, NeckTail, DeerStew, NeckTailGrilled, DeerMeat, CookedDeerMeat, MinceMeatSauce, Sausages, Entrails, SerpentMeatCooked, SerpentStew, SerpentMeat, CookedWolfMeat, WolfMeat, Wolfjerky, LoxMeat, CookedLoxMeat, LoxPie, BestestStick",
+                FoodItems = "RawMeat, BestestTreat, CookedMeat, BoarJerky, NeckTail, DeerStew, NeckTailGrilled, DeerMeat, CookedDeerMeat, MinceMeatSauce, Sausages, Entrails, SerpentMeatCooked, SerpentStew, SerpentMeat, CookedWolfMeat, WolfMeat, Wolfjerky, LoxMeat, CookedLoxMeat, LoxPie,",
                 SpawnChance = 10,
                 RequiredWeather = Weather.None,
                 GroupSize = new Range(1, 2),
@@ -123,10 +117,14 @@ namespace GoodestBoy
             BestestPup.Drops["BoneFragments"].Amount = new Range(1, 2);
             BestestPup.Drops["BoneFragments"].DropChance = 50f;
 
+
             Assembly assembly = Assembly.GetExecutingAssembly();
+
             Harmony harmony = new(ModGUID);
             harmony.PatchAll(assembly);
 
+
         }
+
     }
 }
