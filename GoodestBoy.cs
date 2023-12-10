@@ -23,7 +23,7 @@ namespace GoodestBoy
     public class GoodestBoy : BaseUnityPlugin
     {
         private const string ModName = "GoodestBoy";
-        private const string ModVersion = "0.1.16";
+        private const string ModVersion = "0.1.17";
         private const string ModGUID = "odinplus.plugins.goodestboy";
 
 
@@ -65,11 +65,12 @@ namespace GoodestBoy
             GameObject sfx_gb_whistle = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_gb_whistle");
 
             Item BestestTreat = new("gsd", "BestestTreat");
-            BestestTreat.Name.English("BestestTreat");
+            BestestTreat.Name.English("Bestest Treat");
             BestestTreat.Description.English("A treat for your best friend, doesn't it look delicious. This treat can be hand fed to hungry puppers.");
             BestestTreat.Crafting.Add(CraftingTable.Workbench, 1);
             BestestTreat.RequiredItems.Add("CookedMeat", 2);
             BestestTreat.CraftAmount = 1;
+
 
             Item BestestBall = new("gsd", "BestestBall");
             BestestBall.Name.English("Bestest Ball");
