@@ -23,7 +23,7 @@ namespace GoodestBoy
     public class GoodestBoy : BaseUnityPlugin
     {
         private const string ModName = "GoodestBoy";
-        private const string ModVersion = "0.1.17";
+        private const string ModVersion = "0.2.1";
         private const string ModGUID = "odinplus.plugins.goodestboy";
 
 
@@ -31,11 +31,11 @@ namespace GoodestBoy
         private static readonly ConfigSync configSync = new(ModName) { DisplayName = ModName, CurrentVersion = ModVersion, MinimumRequiredVersion = ModVersion };
 
         private static ConfigEntry<Toggle> serverConfigLocked = null!;
-
+        
         public static ConfigEntry<int> _goodestHealAmount = null!;
         public static ConfigEntry<int> _goodestHealCooldown = null!;
         public static ConfigEntry<int> _goodestDurabilityCost = null!;
-
+        
         private ConfigEntry<T> config<T>(string group, string name, T value, ConfigDescription description, bool synchronizedSetting = true)
         {
             ConfigEntry<T> configEntry = Config.Bind(group, name, value, description);
@@ -96,6 +96,7 @@ namespace GoodestBoy
             {
                 Biome = Heightmap.Biome.BlackForest,
                 CanBeTamed = true,
+                CreatureFaction = Character.Faction.Players,
                 FoodItems = "RawMeat, BestestTreat, CookedMeat, BoarJerky, NeckTail, DeerStew, NeckTailGrilled, DeerMeat, CookedDeerMeat, MinceMeatSauce, Sausages, Entrails, SerpentMeatCooked, SerpentStew, SerpentMeat, CookedWolfMeat, WolfMeat, Wolfjerky, LoxMeat, CookedLoxMeat, LoxPie,",
                 SpawnChance = 10,
                 RequiredWeather = Weather.BlackForestFog,
@@ -120,11 +121,11 @@ namespace GoodestBoy
             };
             BestestPup.Drops["BoneFragments"].Amount = new Range(1, 2);
             BestestPup.Drops["BoneFragments"].DropChance = 50f;
-
-            _goodestHealAmount = Config.Bind("BestestTreat", "Amount", 100, "How much health the treat heals.");
-            _goodestHealCooldown = Config.Bind("BestestTreat", "Cooldown", 60, "How long the cooldown is in seconds.");
-            _goodestDurabilityCost = Config.Bind("BestestTreat", "Durability", 1, "How much durability the treat loses when used.");
-
+            
+            _goodestHealAmount = Config.Bind("Treat Healing", "Amount", 100, "How much health the treat heals.");
+            _goodestHealCooldown = Config.Bind("Treat Cooldown", "Cooldown", 60, "How long the cooldown is in seconds.");
+            _goodestDurabilityCost = Config.Bind("Treat Durability", "Durability", 1, "How much durability the treat loses when used.");
+            
             Assembly assembly = Assembly.GetExecutingAssembly();
 
             Harmony harmony = new(ModGUID);

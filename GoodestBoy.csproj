@@ -141,10 +141,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patches\BestestTreat.cs" />
     <Compile Include="Patches\FetchAI.cs" />
     <Compile Include="Patches\FetchSystem.cs" />
     <Compile Include="GoodestBoy.cs" />
-    <Compile Include="Patches\BestestTreat.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Patches\Recall.cs" />
   </ItemGroup>
