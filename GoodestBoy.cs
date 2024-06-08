@@ -23,7 +23,7 @@ namespace GoodestBoy
     public class GoodestBoy : BaseUnityPlugin
     {
         private const string ModName = "GoodestBoy";
-        private const string ModVersion = "0.2.1";
+        private const string ModVersion = "0.2.2";
         private const string ModGUID = "odinplus.plugins.goodestboy";
 
 
