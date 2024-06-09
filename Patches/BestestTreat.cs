@@ -71,6 +71,7 @@ public class BestestTreat
     {
         static void Postfix(Tameable __instance)
         {
+            if (!__instance.m_nview || !__instance.m_nview.IsValid()) return;
             __instance.m_nview.Register("GoodestHealTameable", _ =>
             {
                 var lastTime = __instance.m_nview.m_zdo.GetInt("LastHealTime");
