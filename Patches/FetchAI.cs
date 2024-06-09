@@ -118,7 +118,8 @@ public class FetchAI : MonoBehaviour
                 m_monsterAI.UpdateAI(dt);
                 if (m_stateTime <= 0f)
                 {
-                    if (m_monsterAI.m_aiStatus.StartsWith("Random"))
+                    if (m_monsterAI.m_randomMoveUpdateTimer <= 0f)
+                    //if (m_monsterAI.m_aiStatus.StartsWith("Random"))
                     {
                         NewAction();
                     }
