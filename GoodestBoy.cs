@@ -23,7 +23,7 @@ namespace GoodestBoy
     public class GoodestBoy : BaseUnityPlugin
     {
         private const string ModName = "GoodestBoy";
-        private const string ModVersion = "0.2.2";
+        private const string ModVersion = "0.2.3";
         private const string ModGUID = "odinplus.plugins.goodestboy";
 
 
@@ -63,6 +63,11 @@ namespace GoodestBoy
             GameObject sfx_dog_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_bark"); //register projectile
             GameObject sfx_dog_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_panting"); //register projectile
             GameObject sfx_gb_whistle = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_gb_whistle");
+            GameObject fx_dog_footstep_jog = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dog_footstep_jog");
+            GameObject fx_dog_footstep_snow_run = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dog_footstep_snow_run");
+            GameObject fx_dog_footstep_water = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dog_footstep_water");
+            GameObject sfx_dog_consume = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_consume");
+            GameObject sfx_dog_footstep_swim = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_footstep_swim");
 
             Item BestestTreat = new("gsd", "BestestTreat");
             BestestTreat.Name.English("Bestest Treat");
@@ -104,6 +109,7 @@ namespace GoodestBoy
                 CheckSpawnInterval = 300,
                 SpecificSpawnTime = SpawnTime.Always,
                 Maximum = 1
+                
             };
             BestestDog.Drops["BoneFragments"].Amount = new Range(1, 2);
             BestestDog.Drops["BoneFragments"].DropChance = 15f;
