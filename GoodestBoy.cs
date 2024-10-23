@@ -127,6 +127,7 @@ namespace GoodestBoy
             Bestest_Pup.Drops["BoneFragments"].Amount = new Range(1, 2);
             Bestest_Pup.Drops["BoneFragments"].DropChance = 50f;
 
+
             Creature BestestDog = new("gsd", "BestestDog")            //add creature
             {
                 Biome = Heightmap.Biome.BlackForest,
