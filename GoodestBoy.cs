@@ -10,6 +10,7 @@ using CreatureManager;
 using HarmonyLib;
 using ItemManager;
 using ServerSync;
+using LocalizationManager;
 using UnityEngine;
 using GoodestBoy.Patches;
 
@@ -58,36 +59,54 @@ namespace GoodestBoy
 
         public void Awake()
         {
+            Localizer.Load();
 
-
-            GameObject sfx_dog_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_bark"); //register projectile
-            GameObject sfx_dog_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_panting"); //register projectile
+            GameObject GSD_Dog_Attack1 = ItemManager.PrefabManager.RegisterPrefab("gsd", "GSD_Dog_Attack1");
+            GameObject GSD_Dog_Attack2 = ItemManager.PrefabManager.RegisterPrefab("gsd", "GSD_Dog_Attack2");
+            GameObject GSD_Dog_Attack3 = ItemManager.PrefabManager.RegisterPrefab("gsd", "GSD_Dog_Attack3");
+            GameObject fx_dogg_backstab = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dogg_backstab"); //register projectile
+            GameObject fx_doggo_crit = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_doggo_crit"); //register projectile
+            GameObject fx_doggo_footstep_jog = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_doggo_footstep_jog");
+            GameObject fx_doggo_footstep_snow_run = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_doggo_footstep_snow_run");
+            GameObject fx_doggo_footstep_water = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_doggo_footstep_water");
+            GameObject fx_doggo_pet = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_doggo_pet");
+            GameObject fx_doggo_tamed = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_doggo_tamed");            
+            GameObject sfx_bestestball_hit = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_bestestball_hit");
+            GameObject sfx_bestestball_throw = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_bestestball_throw");
+            GameObject sfx_doggo_attack = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_attack");
+            GameObject sfx_doggo_attack_hit = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_attack_hit");
+            GameObject sfx_doggo_bark = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_bark");
+            GameObject sfx_doggo_consume = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_consume");
+            GameObject sfx_doggo_death = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_death");
+            GameObject sfx_doggo_hit = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_hit");
+            GameObject sfx_doggo_panting = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_panting");
+            GameObject sfx_doggo_swim = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_doggo_swim");
             GameObject sfx_gb_whistle = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_gb_whistle");
-            GameObject fx_dog_footstep_jog = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dog_footstep_jog");
-            GameObject fx_dog_footstep_snow_run = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dog_footstep_snow_run");
-            GameObject fx_dog_footstep_water = ItemManager.PrefabManager.RegisterPrefab("gsd", "fx_dog_footstep_water");
-            GameObject sfx_dog_consume = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_consume");
-            GameObject sfx_dog_footstep_swim = ItemManager.PrefabManager.RegisterPrefab("gsd", "sfx_dog_footstep_swim");
+            GameObject vfx_doggo_birth = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_doggo_birth");
+            GameObject vfx_doggo_death = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_doggo_death");
+            GameObject vfx_doggo_destruction = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_doggo_destruction");
+            GameObject vfx_doggo_hit = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_doggo_hit");
+            GameObject vfx_doggo_love = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_doggo_love");
+            GameObject vfx_doggo_soothed = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_doggo_soothed");
+            GameObject vfx_dogwater_surface = ItemManager.PrefabManager.RegisterPrefab("gsd", "vfx_dogwater_surface");
+            GameObject GSD_Ragdoll = ItemManager.PrefabManager.RegisterPrefab("gsd", "GSD_Ragdoll");
 
             Item BestestTreat = new("gsd", "BestestTreat");
-            BestestTreat.Name.English("Bestest Treat");
-            BestestTreat.Description.English("A treat for your best friend, doesn't it look delicious. This treat can be hand fed to hungry puppers.");
+
             BestestTreat.Crafting.Add(CraftingTable.Workbench, 1);
             BestestTreat.RequiredItems.Add("CookedMeat", 2);
             BestestTreat.CraftAmount = 1;
 
 
             Item BestestBall = new("gsd", "BestestBall");
-            BestestBall.Name.English("Bestest Ball");
-            BestestBall.Description.English("A dog toy, sometimes he will fetch, sometimes he wont, and sometimes he wont give it back.");
+
             BestestBall.Crafting.Add(CraftingTable.Workbench, 1);
             BestestBall.RequiredItems.Add("LeatherScraps", 2);
             BestestBall.CraftAmount = 1;
             GameObject BestestBall_Projectile = ItemManager.PrefabManager.RegisterPrefab("gsd", "BestestBall_Projectile"); //register projectile
 
             Item GB_Whistle = new("gsd", "GB_Whistle");
-            GB_Whistle.Name.English("GoodestWhistle");
-            GB_Whistle.Description.English("A whistle to call your best friend. Warning, this may call all your friends if you have several.");
+
             GB_Whistle.Crafting.Add(CraftingTable.Workbench, 1);
             GB_Whistle.RequiredItems.Add("FineWood", 1);
             GB_Whistle.CraftAmount = 1;
@@ -96,6 +115,17 @@ namespace GoodestBoy
             statusEffect.m_ttl = .25f; // duration of the status effect.
             shared.m_consumeStatusEffect = statusEffect; // the item = the status effect.
 
+            Creature Bestest_Pup = new("gsd", "Bestest_Pup")            //add creature
+            {
+                Biome = Heightmap.Biome.None,
+                CanSpawn = true,
+                SpawnChance = 100,
+                GroupSize = new Range(1, 2),
+                Maximum = 1
+
+            };
+            Bestest_Pup.Drops["BoneFragments"].Amount = new Range(1, 2);
+            Bestest_Pup.Drops["BoneFragments"].DropChance = 50f;
 
             Creature BestestDog = new("gsd", "BestestDog")            //add creature
             {
@@ -115,18 +145,6 @@ namespace GoodestBoy
             BestestDog.Drops["BoneFragments"].DropChance = 15f;
             BestestDog.Drops["WolfMeat"].Amount = new Range(1, 2);
             BestestDog.Drops["WolfMeat"].DropChance = 50f;
-
-            Creature BestestPup = new("gsd", "BestestPup")            //add creature
-            {
-                Biome = Heightmap.Biome.None,
-                CanSpawn = true,
-                SpawnChance = 100,
-                GroupSize = new Range(1, 2),
-                Maximum = 1
-
-            };
-            BestestPup.Drops["BoneFragments"].Amount = new Range(1, 2);
-            BestestPup.Drops["BoneFragments"].DropChance = 50f;
             
             _goodestHealAmount = Config.Bind("Treat Healing", "Amount", 100, "How much health the treat heals.");
             _goodestHealCooldown = Config.Bind("Treat Cooldown", "Cooldown", 60, "How long the cooldown is in seconds.");

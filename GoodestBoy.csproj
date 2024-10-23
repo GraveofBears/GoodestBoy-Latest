@@ -81,6 +81,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\GraveBear\Desktop\Refs\ItemManager.dll</HintPath>
     </Reference>
+    <Reference Include="LocalizationManager">
+      <HintPath>.\LocalizationManager.dll</HintPath>
+    </Reference>
     <Reference Include="ServerSync, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\GraveBear\Desktop\Refs\ServerSync.dll</HintPath>
@@ -152,11 +155,15 @@
     <Content Include="CreatureManager.dll" />
     <Content Include="ILRepack.targets" />
     <Content Include="ItemManager.dll" />
+    <Content Include="LocalizationManager.dll" />
     <Content Include="ServerSync.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="assets\gsd" />
     <None Include="packages.config" />
+    <EmbeddedResource Include="translations\English.yml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\..\Steam\steamapps\common\Valheim-ptr\unstripped_corlib\UnityEngine.AssetBundleModule.dll" />

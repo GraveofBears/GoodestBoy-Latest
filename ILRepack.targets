@@ -4,6 +4,7 @@
         <ItemGroup>
             <InputAssemblies Include="$(TargetPath)" />
 			<InputAssemblies Include="$(OutputPath)ItemManager.dll" />
+			<InputAssemblies Include="$(OutputPath)\LocalizationManager.dll" />
 			<InputAssemblies Include="$(OutputPath)CreatureManager.dll" />
 			<InputAssemblies Include="$(OutputPath)ServerSync.dll" />
         </ItemGroup>
