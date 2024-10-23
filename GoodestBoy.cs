@@ -99,7 +99,8 @@ namespace GoodestBoy
 
 
             Item BestestBall = new("gsd", "BestestBall");
-
+            BestestBall.Name.English("Bestest Ball");
+            BestestBall.Description.English("A dog toy, sometimes he will fetch, sometimes he wont, and sometimes he wont give it back.");
             BestestBall.Crafting.Add(CraftingTable.Workbench, 1);
             BestestBall.RequiredItems.Add("LeatherScraps", 2);
             BestestBall.CraftAmount = 1;

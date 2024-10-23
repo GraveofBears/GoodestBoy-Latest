@@ -1,4 +1,4 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using HarmonyLib;
 using UnityEngine;
@@ -18,6 +18,7 @@ public class FetchAI : MonoBehaviour
         Wait,
         DropBall
     }
+
 
     public static readonly List<FetchAI> _fetchAiList = new();
     public AIStates m_AiState;
@@ -114,75 +115,75 @@ public class FetchAI : MonoBehaviour
         switch (m_AiState)
         {
             case AIStates.BaseAI:
-            {
-                m_monsterAI.UpdateAI(dt);
-                if (m_stateTime <= 0f)
                 {
-                    if (m_monsterAI.m_randomMoveUpdateTimer <= 0f)
-                    //if (m_monsterAI.m_aiStatus.StartsWith("Random"))
+                    m_monsterAI.UpdateAI(dt);
+                    if (m_stateTime <= 0f)
                     {
-                        NewAction();
+                        if (m_monsterAI.m_randomMoveUpdateTimer <= 0f)
+                        //if (m_monsterAI.m_aiStatus.StartsWith("Random"))
+                        {
+                            NewAction();
+                        }
+                        else
+                        {
+                            m_stateTime = 3f;
+                        }
                     }
-                    else
-                    {
-                        m_stateTime = 3f;
-                    }
+                    break;
                 }
-                break;
-            }
             case AIStates.GettingBall:
-            {
-                if (!ValidBallToGet)
                 {
-                    m_stateTime = 0f;
+                    if (!ValidBallToGet)
+                    {
+                        m_stateTime = 0f;
+                        break;
+                    }
+
+                    var position = m_targetItem.transform.position;
+                    if (m_monsterAI.MoveTo(dt, position, m_distanceFromItem, run: true) &&
+                        global::Utils.DistanceXZ(transform.position, position) <= m_distanceFromItem)
+                    {
+                        m_monsterAI.LookAt(position);
+                        if (m_monsterAI.IsLookingAt(position, 20f) && ValidBallToGet)
+                        {
+                            m_animator.Play("consume");
+                            StartCoroutine(PickupBall());
+                            m_AiState = AIStates.Wait;
+                            m_stateTime = 5f;
+                        }
+                    }
                     break;
                 }
-
-                var position = m_targetItem.transform.position;
-                if (m_monsterAI.MoveTo(dt, position, m_distanceFromItem, run: true) &&
-                    global::Utils.DistanceXZ(transform.position, position) <= m_distanceFromItem)
-                {
-                    m_monsterAI.LookAt(position);
-                    if (m_monsterAI.IsLookingAt(position, 20f) && ValidBallToGet)
-                    {
-                        m_animator.Play("consume");
-                        StartCoroutine(PickupBall());
-                        m_AiState = AIStates.Wait;
-                        m_stateTime = 5f;
-                    }
-                }
-                break;
-            }
             case AIStates.ReturningBall:
-            {
-                if (!ValidBall)
                 {
-                    m_hasABall = false;
-                    m_stateTime = 0f;
+                    if (!ValidBall)
+                    {
+                        m_hasABall = false;
+                        m_stateTime = 0f;
+                        break;
+                    }
+
+                    var playerTransform = Player.m_localPlayer.transform;
+                    if (m_monsterAI.MoveTo(dt, playerTransform.position + playerTransform.forward * m_distanceFromPlayer,
+                            0f, run: true))
+                    {
+                        m_monsterAI.LookAt(playerTransform.position);
+                        if (m_monsterAI.IsLookingAt(playerTransform.position, 15f))
+                        {
+                            m_pausing = true;
+                            m_AiState = AIStates.DropBall;
+                            m_stateTime = Random.Range(0.4f, 1.3f);
+                        }
+                    }
                     break;
                 }
-
-                var playerTransform = Player.m_localPlayer.transform;
-                if (m_monsterAI.MoveTo(dt, playerTransform.position + playerTransform.forward * m_distanceFromPlayer,
-                        0f, run: true))
-                {
-                    m_monsterAI.LookAt(playerTransform.position);
-                    if (m_monsterAI.IsLookingAt(playerTransform.position, 15f))
-                    {
-                        m_pausing = true;
-                        m_AiState = AIStates.DropBall;
-                        m_stateTime = Random.Range(0.4f, 1.3f);
-                    }
-                }
-                break;
-            }
             case AIStates.DropBall:
-            {
-                DropBall();
-                m_AiState = AIStates.Wait;
-                m_stateTime = Random.Range(2f, 4f);
-                break;
-            }
+                {
+                    DropBall();
+                    m_AiState = AIStates.Wait;
+                    m_stateTime = Random.Range(2f, 4f);
+                    break;
+                }
             case AIStates.Idle:
             case AIStates.Wait:
                 break;
@@ -211,7 +212,7 @@ public class FetchAI : MonoBehaviour
             m_stateTime = 0f;
             yield break;
         }
-        
+
         Traverse.Create(m_targetItem.GetComponent<ZSyncTransform>()).Field("m_useGravity").SetValue(false);
         m_targetItem.collisionDetectionMode = CollisionDetectionMode.ContinuousSpeculative;
         m_targetItem.isKinematic = true;
