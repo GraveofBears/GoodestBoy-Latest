@@ -36,13 +36,9 @@ public class FetchSystem
 
     //this is where fetch ai is added to creatures when they became tame.
     [HarmonyPostfix]
-    [HarmonyPatch(typeof(MonsterAI), nameof(MonsterAI.MakeTame))]
-    public static void MakeTame_Postfix(MonsterAI __instance)
+    [HarmonyPatch(typeof(Procreation), nameof(Procreation.Awake))]
+    public static void Awake_Postfix(Procreation __instance)
     {
-        //__instance.gameObject.name.Replace("(Clone)", "") != "Wolf" -means if the creature is not a wolf then ignore the patch
-        //change the "Wolf" with the name of your creature.
-        //you can also this change that into this: or like this: !__instance.gameObject.name.ToLower().Contains("yourcreature")
-        //you can add more creature by adding this: || __instance.gameObject.name.Replace("(Clone)", "") != "yourcreature" 
         if (__instance.gameObject.name.Replace("(Clone)", "") != "BestestDog") return;
         var component = __instance.GetComponent<Character>();
         if ((object)component != null && component.IsTamed())
@@ -51,22 +47,24 @@ public class FetchSystem
         }
     }
 
-    //this patch also adds the fetch ai to creatures when they became tame.
-    [HarmonyPostfix]
-    [HarmonyPatch(typeof(Procreation), nameof(Procreation.Awake))]
-    public static void Awake_Postfix(Procreation __instance)
-    {
-        //__instance.gameObject.name.Replace("(Clone)", "") != "Wolf" -means if the creature is not a wolf then ignore the patch
-        //change the "Wolf" with the name of your creature.
-        //you can also this change that into this: or like this: !__instance.gameObject.name.ToLower().Contains("yourcreature")
-        //you can add more creature by adding this: || __instance.gameObject.name.Replace("(Clone)", "") != "yourcreature" 
-        if (__instance.gameObject.name.Replace("(Clone)", "") != "BestestDog") return;
-        var component = __instance.GetComponent<Character>();
-        if ((object)component != null && component.IsTamed())
-        {
-            NewTame(__instance.gameObject);
-        }
-    }
+
+
+    ////this patch also adds the fetch ai to creatures when they became tame.
+    //[HarmonyPostfix]
+    //[HarmonyPatch(typeof(Procreation), nameof(Procreation.Awake))]
+    //public static void Awake_Postfix(Procreation __instance)
+    //{
+    //    //__instance.gameObject.name.Replace("(Clone)", "") != "Wolf" -means if the creature is not a wolf then ignore the patch
+    //    //change the "Wolf" with the name of your creature.
+    //    //you can also this change that into this: or like this: !__instance.gameObject.name.ToLower().Contains("yourcreature")
+    //    //you can add more creature by adding this: || __instance.gameObject.name.Replace("(Clone)", "") != "yourcreature" 
+    //    if (__instance.gameObject.name.Replace("(Clone)", "") != "BestestDog") return;
+    //    var component = __instance.GetComponent<Character>();
+    //    if ((object)component != null && component.IsTamed())
+    //    {
+    //        NewTame(__instance.gameObject);
+    //    }
+    //}
 
     //this patch adds the fetch ai to already tamed creatures.
     [HarmonyPostfix]
@@ -110,10 +108,11 @@ public class FetchSystem
     //this method checks and adds the fetch ai script
     private static void NewTame(GameObject pet)
     {
-        if (pet.GetComponent<FetchAI>()) return;
+        if (pet.name.Replace("(Clone)", "") != "BestestDog" || pet.GetComponent<FetchAI>() || pet.GetComponent<Procreation>() != null) return;
         pet.GetComponent<MonsterAI>().enabled = false;
         pet.AddComponent<FetchAI>();
     }
+
 
     [HarmonyPostfix]
     [HarmonyPatch(typeof(ItemDrop), nameof(ItemDrop.DropItem))]
