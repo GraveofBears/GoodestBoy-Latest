@@ -40,8 +40,9 @@ namespace GoodestBoy
         internal static ConfigEntry<int> dogFedDuration = null!;
         internal static ConfigEntry<int> dogTimeToTame = null!;
         internal static ConfigEntry<bool> dogStartsTamed = null!;
-        internal static ConfigEntry<int> dogProcreationTime = null!;
+        //internal static ConfigEntry<int> dogProcreationTime = null!;
         internal static ConfigEntry<Character.Faction> dogCharacterFaction = null!;
+        internal static ConfigEntry<Character.Faction> pupperCharacterFaction = null!;
         internal static ConfigEntry<int> pupperHealth = null!;
         internal static ConfigEntry<int> pupperOffspringGrowupTime = null!;
 
@@ -72,12 +73,11 @@ namespace GoodestBoy
             Localizer.Load();
 
             dogHealth = config("Goodest Boy", "Health", 250, new ConfigDescription("Declare health points for BestestDog"));
-            dogFedDuration = config("Goodest Boy", "Fed Duration", 600, new ConfigDescription("Declare how long BestestDog is fed"));
-            dogTimeToTame = config("Goodest Boy", "Time Till Tame", 600, new ConfigDescription("Declare how long it takes to tame BestestDog"));
+            dogFedDuration = config("Goodest Boy", "Fed Duration", 300, new ConfigDescription("Declare how long BestestDog is fed"));
+            dogTimeToTame = config("Goodest Boy", "Time Till Tame", 800, new ConfigDescription("Declare how long it takes to tame BestestDog"));
             dogStartsTamed = config("Goodest Boy", "Starts Tamed", false, new ConfigDescription("Declare if dog starts tamed"));
-            dogProcreationTime = config("Goodest Boy", "Procreation Time", 600, new ConfigDescription("Declare how long dogs procreate"));
             dogCharacterFaction = config("Goodest Boy", "Character Faction", Character.Faction.Players, new ConfigDescription("Declare DestestDogs Faction"));
-
+            pupperCharacterFaction = config("Bestest Pup", "Character Faction", Character.Faction.Players, new ConfigDescription("Declare Bestest Pup Faction"));
             pupperHealth = config("Bestest Pup", "Health", 50, new ConfigDescription("Declare health points for Pupper"));
             pupperOffspringGrowupTime = config("Bestest Pup", "Grow-Up Time", 2000, new ConfigDescription("Declare growup time needed to convert offspring into GoodestBoy.Time in seconds."));
 
@@ -159,7 +159,8 @@ namespace GoodestBoy
             Bestest_Pup.Drops["BoneFragments"].DropChance = 50f;
             Bestest_Pup.Prefab.GetComponent<Humanoid>().m_health = pupperHealth.Value;
             Bestest_Pup.Prefab.GetComponent<Growup>().m_growTime = pupperOffspringGrowupTime.Value;
-
+            Bestest_Pup.Prefab.GetComponent<Humanoid>().m_faction = pupperCharacterFaction.Value;
+            
 
 
             Creature BestestDog = new("gsd", "BestestDog")            //add creature
@@ -185,7 +186,7 @@ namespace GoodestBoy
             BestestDog.Prefab.GetComponent<Tameable>().m_fedDuration = dogFedDuration.Value;
             BestestDog.Prefab.GetComponent<Tameable>().m_tamingTime = dogFedDuration.Value;
             BestestDog.Prefab.GetComponent<Tameable>().m_startsTamed = dogStartsTamed.Value;
-            BestestDog.Prefab.GetComponent<Procreation>().m_pregnancyDuration = dogProcreationTime.Value;
+           // BestestDog.Prefab.GetComponent<Procreation>().m_pregnancyDuration = dogProcreationTime.Value;
             BestestDog.Prefab.GetComponent<Humanoid>().m_faction = dogCharacterFaction.Value;
             _goodestHealAmount = Config.Bind("Treat Healing", "Amount", 100, "How much health the treat heals.");
             _goodestHealCooldown = Config.Bind("Treat Cooldown", "Cooldown", 60, "How long the cooldown is in seconds.");
